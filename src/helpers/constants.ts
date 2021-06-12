@@ -11,7 +11,6 @@ export default {
         DELETED:   'User deleted successfully',
     },
     TOKENS: {
-        CREATED:   'The token was created successfully',
         REFRESHED: 'The token was refreshed successfully',
         REVOKED:   'The token was revoked successfully',
     }

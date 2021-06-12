@@ -7,55 +7,63 @@ import {
     UpdateDateColumn,
     BeforeInsert,
     BeforeUpdate,
-    AfterLoad
+    AfterLoad,
+    OneToMany
 } from 'typeorm'
 import { 
     validateOrReject, 
     Length, 
     IsNotEmpty, 
-    IsEmail,
-    IsBoolean
+    IsEmail
 } from 'class-validator';
 import bcrypt from 'bcrypt'
+import { Token } from './Token';
 
 
 @Entity('users')
 @Unique(['email', 'username'])
 export class User {
     @PrimaryGeneratedColumn('uuid')
-    public id: string
+    id: string
 
     @Column()
     @IsNotEmpty()
     @Length(4, 50)
-    public name: string
+    name: string
 
     @Column()
     @IsNotEmpty()
     @Length(8, 100)
-    public password: string
+    password: string
 
     @Column()
     @IsNotEmpty()
     @IsEmail()
-    public email: string
+    email: string
 
     @Column()
     @IsNotEmpty()
     @Length(8, 20)
-    public username: string
+    username: string
 
     @Column()
-    public company: string    
+    company: string    
 
     @Column()  
-    public is_active: boolean 
+    is_active: boolean 
 
     @CreateDateColumn()
-    public created_at: Date
+    created_at: Date
     
     @UpdateDateColumn()
-    public updated_at: Date
+    updated_at: Date
+
+    @OneToMany(
+        () => Token,
+        token => token.user
+    )
+    tokens: Token[]
+
 
     private oldPassword: string
 
