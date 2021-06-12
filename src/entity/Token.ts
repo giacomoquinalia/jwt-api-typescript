@@ -18,6 +18,9 @@ export class Token {
     user_id: string
 
     @Column()
+    refresh_token: string
+
+    @Column()
     expires: Date
 
     @Column()

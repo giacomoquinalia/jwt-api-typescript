@@ -17,6 +17,11 @@ export class createTokens1623461514640 implements MigrationInterface {
                     isNullable: false
                 },
                 {
+                    name: 'refresh_token',
+                    type: 'string',
+                    isUnique: true
+                },
+                {
                     name: 'expires',
                     type: 'varchar',
                     isNullable: false

@@ -5,7 +5,7 @@ import MESSAGE from '../../../helpers/constants'
 import { RefreshTokenUseCase } from './RefreshTokenUseCase'
 
 
-export class CreateUserController {    
+export class RefreshTokenController {    
     
     constructor(
         private refreshTokenUseCase: RefreshTokenUseCase
@@ -18,11 +18,16 @@ export class CreateUserController {
             return res.status(400).json(ErrorHandler(errors))
         }
 
-        const { refresh_token } = req.body
+        const { user_id, refresh_token } = req.body
+        const created_by_ip = req.ip
+        const expires = new Date(Date.now() + 7*24*60*60*1000) // 7 days
 
         try {     
             const newRefreshToken = await this.refreshTokenUseCase.execute({
-                refresh_token
+                user_id,
+                refresh_token,
+                expires,
+                created_by_ip
             })
 
             return res.status(201).json({

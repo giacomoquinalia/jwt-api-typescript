@@ -1,31 +1,39 @@
-// import { getRepository } from 'typeorm'
-// import { ITokensRepository } from "../../ITokenRepository"
-// import { Token } from '../../../entity/Token'
-// import { ICreateTokenDTO } from '../../../useCases/CreateToken/CreateTokenDTO'
+import { getRepository, Repository } from 'typeorm'
+import { Token } from '../../../entity/Token'
+import { IRefreshTokenRequestDTO } from '../../../useCases/Token/RefreshToken/RefreshTokenRequestDTO'
+import { ITokensRepository, IRefreshTokenFindOne } from '../../ITokenRepository'
 
 
-// export default class PostgresTokensRepository implements ITokensRepository {
-//     private repository = getRepository(Token)
+export class PostgresRefreshTokensRepository implements ITokensRepository {
 
-//     constructor() {}
+    async findOne(options: IRefreshTokenFindOne): Promise<Token> {     
+        const repository = getRepository(Token)  
 
-//     async create({
-//         id,
-//         user_id,
-//         token, 
-//         expires,
-//         created_by_ip
-//      }: ICreateTokenDTO): Promise<Token> { 
-//         const newToken = await this.repository.create({
-//             id,
-//             userConnection: user_id,
-//             token, 
-//             expires, 
-//             created_by_ip
-//         })
+        const RefreshToken = await repository.findOne(options)
 
-//         await this.repository.save(newToken)
-        
-//         return newToken
-//     }
-// }
+        return RefreshToken!
+    }
+
+    async create({ 
+        id, refresh_token, expires, created_by_ip 
+    }: IRefreshTokenRequestDTO): Promise<Token> {
+        const repository = getRepository(Token)
+ 
+        const newRefreshToken = await repository.create({
+            id,
+            refresh_token,
+            expires,
+            created_by_ip
+        })
+
+        await repository.save(newRefreshToken)
+
+        return newRefreshToken
+    }
+
+    async update(id: string, props: object): Promise<void> {
+        const repository = getRepository(Token)
+ 
+        await repository.update(id, props)
+    }    
+}
