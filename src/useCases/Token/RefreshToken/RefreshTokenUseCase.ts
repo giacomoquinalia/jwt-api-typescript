@@ -26,8 +26,18 @@ export class RefreshTokenUseCase {
             id: refreshToken.user_id
         })
 
+        if (!user.is_active) {
+            throw new Error(`User ${user.username} is inactive`)
+        }
+
         const token = generateToken(user)
         const generatedRefreshToken = generateRefreshToken(user.id)
+
+        await this.refreshTokensRepository.update(refreshToken.id, {
+            revoked: true,
+            revoked_by_ip: ip_address,
+            revoked_by_token: generatedRefreshToken
+        })
 
         const newRefreshToken = await this.refreshTokensRepository.create({
             id: v4(),

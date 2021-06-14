@@ -32,6 +32,10 @@ export class createTokens1623461514640 implements MigrationInterface {
                     default: false
                 },
                 {
+                    name: 'revoked_by_token',
+                    type: 'varchar'
+                },
+                {
                     name: 'revoked_by_ip',
                     type: 'varchar'
                 },

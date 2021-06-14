@@ -27,6 +27,9 @@ export class RefreshToken {
     revoked: boolean
 
     @Column()
+    revoked_by_token: string
+
+    @Column()
     revoked_by_ip: string
 
     @Column()
