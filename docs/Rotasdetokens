@@ -1,0 +1,14 @@
+POST /refresh_token/
+
+O usuario deve enviar o refresh_token no body da requisição
+Devo verificar se o refresh_token existe no banco e se está expirado ou revogado
+Se estiver, respondo com um erro dizendo que está inválido
+Senão, devo gerar um novo JWT e um novo refresh_token opcional
+
+
+Controle de refresh_tokens
+
+O usuario não pode ter mais de 24 refresh_tokens
+Ao obter todos os refresh tokens:
+Se nenhum refresh token está revogado ou expirado, não gero um novo opcional
+Se estiver revogado ou expirado, deleto este refresh token e gero um novo no lugar

@@ -17,7 +17,7 @@ import {
     IsEmail
 } from 'class-validator';
 import bcrypt from 'bcrypt'
-import { Token } from './Token';
+import { RefreshToken } from './RefreshToken';
 
 
 @Entity('users')
@@ -59,10 +59,10 @@ export class User {
     updated_at: Date
 
     @OneToMany(
-        () => Token,
-        token => token.user
+        () => RefreshToken,
+        refreshToken => refreshToken.user
     )
-    tokens: Token[]
+    refresh_tokens: RefreshToken[]
 
 
     private oldPassword: string

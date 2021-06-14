@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from 'jsonwebtoken'
 import MESSAGE from '../helpers/constants'
+import { config } from 'dotenv'; config()
 
 
 export default function isAuthenticated(

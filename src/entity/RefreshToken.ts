@@ -9,8 +9,8 @@ import {
 import { User } from './User'
 
 
-@Entity('tokens')
-export class Token {
+@Entity('refresh_tokens')
+export class RefreshToken {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
@@ -40,7 +40,7 @@ export class Token {
 
     @ManyToOne(
         () => User,
-        user => user.tokens
+        user => user.refresh_tokens
     )
     user: User
 
