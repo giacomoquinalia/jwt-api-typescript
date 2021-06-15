@@ -2,7 +2,7 @@ import { Router } from 'express'
 import isAuthenticated from '../middlewares/JWTAuthentication'
 import validate from '../middlewares/RequestValidator/Tokens'
 import { refreshTokenController } from '../useCases/Token/RefreshToken'
-// import { revokeTokenController } from '../useCases/Token/revokeTokenController'
+import { revokeRefreshTokenController } from '../useCases/Token/RevokeRefreshToken'
 
 const TokenRoutes = Router()
 
@@ -16,7 +16,8 @@ TokenRoutes
     .put(
         '/revoke',
         isAuthenticated,
-        validate('revokeRefreshToken')
+        validate('revokeRefreshToken'),
+        revokeRefreshTokenController.handle
     )
 
 

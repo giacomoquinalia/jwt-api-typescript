@@ -14,7 +14,8 @@ import {
     validateOrReject, 
     Length, 
     IsNotEmpty, 
-    IsEmail
+    IsEmail,
+    isNotEmpty
 } from 'class-validator';
 import bcrypt from 'bcrypt'
 import { RefreshToken } from './RefreshToken';
@@ -47,9 +48,10 @@ export class User {
     username: string
 
     @Column()
+    @IsNotEmpty()
     company: string    
 
-    @Column()  
+    @Column()
     is_active: boolean 
 
     @CreateDateColumn()

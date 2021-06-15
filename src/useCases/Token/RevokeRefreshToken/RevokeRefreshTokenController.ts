@@ -5,7 +5,7 @@ import ErrorHandler from '../../../errors/ErrorHandler'
 import MESSAGE from '../../../helpers/constants'
 
 
-export class RefreshTokenController {    
+export class RevokeRefreshTokenController {
 
     constructor(
         private revokeRefreshTokenUseCase: RevokeRefreshTokenUseCase
@@ -21,7 +21,7 @@ export class RefreshTokenController {
         const { refresh_token } = req.body
         const ip_address = req.ip
 
-        try {     
+        try {
             const revokedRefreshToken = await this.revokeRefreshTokenUseCase.execute({
                 refresh_token,
                 ip_address
