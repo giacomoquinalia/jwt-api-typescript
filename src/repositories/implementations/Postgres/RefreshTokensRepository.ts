@@ -36,4 +36,10 @@ export class PostgresRefreshTokensRepository implements IRefreshTokensRepository
  
         await repository.update(id, props)
     }    
+
+    async delete(id: string): Promise<void> {
+        const repository = getRepository(RefreshToken)
+        
+        await repository.delete(id)
+    }
 }

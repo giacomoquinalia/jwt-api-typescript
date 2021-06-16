@@ -1,9 +1,9 @@
 import { IRefreshTokenRequestDTO } from './RefreshTokenRequestDTO'
-import filterRefreshToken from '../../../utils/filterRefreshToken'
 import { IRefreshTokensRepository } from '../../../repositories/IRefreshTokenRepository'
 import { generateRefreshToken, generateToken } from '../../../utils/token'
 import { IUsersRepository } from '../../../repositories/IUserRepository'
 import { v4 } from 'uuid'
+import filterRefreshToken from '../../../utils/filterRefreshToken'
 import filterUser from '../../../utils/filterUser'
 
 
@@ -18,8 +18,18 @@ export class RefreshTokenUseCase {
             refresh_token
         })
 
-        if (!refreshToken || !refreshToken.isActive) {
+        if (!refreshToken) {
             throw new Error('Invalid refresh token')
+        }  
+
+        if (refreshToken.revoked) {
+            throw new Error('The refresh token was revoked')
+        }
+
+        if (refreshToken.isExpired()) {
+            await this.refreshTokensRepository.delete(refreshToken.id)
+
+            throw new Error('The refresh token was deleted because it is expired')
         }
 
         const user = await this.usersRepository.findOne({

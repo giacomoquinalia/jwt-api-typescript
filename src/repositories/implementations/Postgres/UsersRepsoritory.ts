@@ -31,15 +31,15 @@ export class PostgresUsersRepository implements IUsersRepository {
         return newUser
     }
 
-    async delete(id: string): Promise<void> {
-        const repository = getRepository(User)
- 
-        await repository.delete(id)
-    }
-
     async update(id: string, props: object): Promise<void> {
         const repository = getRepository(User)
  
         await repository.update(id, props)
     }
+
+    async delete(id: string): Promise<void> {
+        const repository = getRepository(User)
+ 
+        await repository.delete(id)
+    }    
 }
