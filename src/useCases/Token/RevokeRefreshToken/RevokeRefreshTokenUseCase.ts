@@ -17,6 +17,10 @@ export class RevokeRefreshTokenUseCase {
             throw new Error('Invalid refresh token')
         }
 
+        if (refreshToken.revoked) {
+            throw new Error('The refresh token is already revoked')
+        }
+
         await this.refreshTokensRepository.update(refreshToken.id, {
             revoked: true,
             revoked_by_ip: ip_address
