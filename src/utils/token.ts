@@ -1,9 +1,7 @@
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
 import { ICreateUserRequestDTO } from '../useCases/User/CreateUser/CreateUserRequestDTO'
-import { config } from 'dotenv'
-config()
-
+import { config } from 'dotenv'; config()
 
 
 export function generateToken({ id, name, email, username }: ICreateUserRequestDTO): string {
@@ -18,6 +16,7 @@ export function generateToken({ id, name, email, username }: ICreateUserRequestD
         { expiresIn: '60m' } // 1 hour | 60 minutes
     )
 }
+
 
 export function generateRefreshToken(user_id: string): string {
     return crypto.randomBytes(40).toString('hex')

@@ -4,7 +4,8 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne
+    ManyToOne,
+    JoinColumn
 } from 'typeorm'
 import { User } from './User'
 
@@ -45,6 +46,7 @@ export class RefreshToken {
         () => User,
         user => user.refresh_tokens
     )
+    @JoinColumn({ name: 'user_id', referencedColumnName: 'id'})
     user: User
 
 

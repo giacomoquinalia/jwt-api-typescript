@@ -15,12 +15,13 @@ export class PostgresRefreshTokensRepository implements IRefreshTokensRepository
     }
 
     async create({ 
-        id, refresh_token, expires, created_by_ip 
+        id, user_id, refresh_token, expires, created_by_ip 
     }: IRefreshTokenRequestDTO): Promise<RefreshToken> {
         const repository = getRepository(RefreshToken)
  
         const newRefreshToken = await repository.create({
             id,
+            user_id,
             refresh_token,
             expires,
             created_by_ip

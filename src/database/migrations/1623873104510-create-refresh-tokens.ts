@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createTokens1623461514640 implements MigrationInterface {
+export class createRefreshTokens1623873104510 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
@@ -18,7 +18,7 @@ export class createTokens1623461514640 implements MigrationInterface {
                 },
                 {
                     name: 'refresh_token',
-                    type: 'string',
+                    type: 'varchar',
                     isUnique: true
                 },
                 {
@@ -33,15 +33,18 @@ export class createTokens1623461514640 implements MigrationInterface {
                 },
                 {
                     name: 'revoked_by_token',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isNullable: true
                 },
                 {
                     name: 'revoked_by_ip',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isNullable: true
                 },
                 {
                     name: 'created_by_ip',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isNullable: true
                 },
                 {
                     name: 'created_at',
@@ -61,7 +64,7 @@ export class createTokens1623461514640 implements MigrationInterface {
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE'
             }]
-        }))
+        }))        
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

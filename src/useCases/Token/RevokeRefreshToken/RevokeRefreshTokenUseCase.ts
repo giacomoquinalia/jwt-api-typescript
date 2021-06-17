@@ -23,6 +23,7 @@ export class RevokeRefreshTokenUseCase {
 
         await this.refreshTokensRepository.update(refreshToken.id, {
             revoked: true,
+            revoked_by_token: refresh_token,
             revoked_by_ip: ip_address
         })
 

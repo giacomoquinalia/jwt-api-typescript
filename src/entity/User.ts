@@ -10,12 +10,11 @@ import {
     AfterLoad,
     OneToMany
 } from 'typeorm'
-import { 
-    validateOrReject, 
-    Length, 
-    IsNotEmpty, 
-    IsEmail,
-    isNotEmpty
+import {
+    validateOrReject,
+    Length,
+    IsNotEmpty,
+    IsEmail
 } from 'class-validator';
 import bcrypt from 'bcrypt'
 import { RefreshToken } from './RefreshToken';

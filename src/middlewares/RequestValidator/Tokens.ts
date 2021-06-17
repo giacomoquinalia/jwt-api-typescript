@@ -7,7 +7,7 @@ export default function validateRequest(method: string): any {
             return [
                 body('refresh_token', 'Parameter required: refresh_token -> string').isString()
             ]
-        case 'revokeToken':
+        case 'revokeRefreshToken':
             return [
                 body('refresh_token', 'Parameter required: refresh_token -> string').isString()
             ]

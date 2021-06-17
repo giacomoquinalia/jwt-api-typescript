@@ -33,7 +33,7 @@ export default class AuthenticateUserUseCase {
             id: v4(),
             user_id: user.id,
             refresh_token: refreshToken,
-            expires: new Date(Date.now()),
+            expires: new Date(Date.now() + 90*24*60*60*1000),
             created_by_ip: ip_address
         })
 

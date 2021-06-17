@@ -22,7 +22,7 @@ UserRoutes
         authenticateUserController.handle
     )
     .post(
-        '/:id',
+        '/',
         isAuthenticated,
         validateRequest('create'),
         createUserController.handle

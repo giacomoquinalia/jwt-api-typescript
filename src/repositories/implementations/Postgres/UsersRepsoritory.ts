@@ -40,6 +40,8 @@ export class PostgresUsersRepository implements IUsersRepository {
     async delete(id: string): Promise<void> {
         const repository = getRepository(User)
  
-        await repository.delete(id)
+        const result = await repository.delete(id)
+
+        console.log(result)
     }    
 }
